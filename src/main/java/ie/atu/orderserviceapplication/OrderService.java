@@ -11,13 +11,12 @@ public class OrderService {
     private OrderRepository orderRepository;
 
     public Order createOrder(Order order) {
-        // Calculate the total price based on items in the order
         double totalPrice = order.getItems().stream()
                 .mapToDouble(item -> item.getPrice() * item.getQuantity())
                 .sum();
 
         order.setTotalPrice(totalPrice);
-        order.setStatus("Pending"); // Default status
+        order.setStatus("Pending");
 
         return orderRepository.save(order);
     }
